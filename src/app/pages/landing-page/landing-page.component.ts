@@ -4,8 +4,11 @@ import { USStates } from 'src/app/models/states';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.css']
+  styleUrls: ['./landing-page.component.css'],
 })
 export class LandingPageComponent {
-  states = USStates
+  states = Object.entries(USStates).map(([name, abbreviation]) => ({
+    name,
+    abbreviation,
+  }));
 }
