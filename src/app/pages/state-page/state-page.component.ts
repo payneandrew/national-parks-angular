@@ -1,10 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
-import { ParkDetail, ParkResponse } from 'src/app/models/parks';
+import { ParkDetail } from 'src/app/models/parks';
 import { USStates } from 'src/app/models/states';
-import { environment } from 'src/environments/environment';
+import { NationalParksService } from 'src/app/services/national-parks.service';
 
 @Component({
   selector: 'app-state-page',
@@ -17,21 +15,11 @@ export class StatePageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    // TODO: Refactor into a service so that we don't call HttpClient directly in a component
-    private http: HttpClient,
+    private nationalparkService: NationalParksService
+
   ) {}
 
   async ngOnInit() {
-    const params = new HttpParams()
-      .set('stateCode', this.stateCode)
-      .set('api_key', environment.NP_API_KEY);
-
-    const { data } = await firstValueFrom(
-      this.http.get<ParkResponse>(`https://developer.nps.gov/api/v1/parks`, {
-        params,
-      }),
-    );
-
-    this.parks = data;
+    this.parks = await this.nationalparkService.getParks(this.stateCode);
   }
 }
