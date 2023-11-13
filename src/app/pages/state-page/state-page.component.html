@@ -1,9 +1,9 @@
 <div
-  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4"
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4"
 >
-  <div *ngFor="let park of parks" [routerLink]="['/park-details', park.parkCode]" style="cursor:pointer;" className="bg-white p-4 rounded-lg shadow-md">
-    <div className="flex justify-between items-start">
-      <h2 className="text-xl font-semibold mb-2 text-rocks-canyons">
+  <div *ngFor="let park of parks" [routerLink]="['/park-details', park.parkCode]" style="cursor:pointer;" class="bg-white p-4 rounded-lg shadow-md">
+    <div class="flex justify-between items-start">
+      <h2 class="text-xl font-semibold mb-2 text-rocks-canyons">
         {{ park.fullName }}
       </h2>
 
@@ -13,7 +13,7 @@
           ? "Click to remove park from your list of visited parks."
           : "Click to add park to your list of visited parks."
       }
-      className="flex-shrink-0"
+      class="flex-shrink-0"
       onClick={() => {
         handleSetVisited(park.parkCode);
       }}
@@ -27,16 +27,17 @@
         alt={isParkVisited(park.parkCode) ? "Visited" : "Not Visited"}
         width={50}
         height={50}
-        className="cursor-pointer transform transition-transform duration-200 hover:scale-125"
+        class="cursor-pointer transform transition-transform duration-200 hover:scale-125"
       />
     </button>
     </div> -->
 
-      <div className="flex flex-col items-center justify-center relative">
-        <p className="text-gray-700">{{ park.description }}</p>
+      <div class="flex flex-col items-center justify-center relative">
+        <p class="text-gray-700">{{ park.description }}</p>
         <img
-          [src]="park.images[0].url!"
-          [alt]="park.images[0]?.altText!"
+          *ngIf="park.images[0]?.url"
+          [src]="park.images[0].url"
+          [alt]="park.images[0].altText"
           width=400
           height=400
         />

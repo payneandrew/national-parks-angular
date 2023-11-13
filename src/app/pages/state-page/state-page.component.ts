@@ -16,10 +16,9 @@ export class StatePageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private nationalparkService: NationalParksService
-
   ) {}
 
-  async ngOnInit() {
-    this.parks = await this.nationalparkService.getParks(this.stateCode);
+  ngOnInit() {
+    this.nationalparkService.getParks(this.stateCode).subscribe((data) => this.parks = data)
   }
 }
