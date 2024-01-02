@@ -29,5 +29,4 @@ getParkDetail(parkCode: string) {
       }).pipe(map((response) => response.data[0]))
     return response
 }
-
 }

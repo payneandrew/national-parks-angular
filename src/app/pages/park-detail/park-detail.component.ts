@@ -18,6 +18,6 @@ export class ParkDetailComponent {
   ) {}
 
   async ngOnInit() {
-    this.park = await this.nationalparkService.getParkDetail(this.parkCode)
+    this.nationalparkService.getParkDetail(this.parkCode).subscribe((data) => this.park = data)
   }
 }
